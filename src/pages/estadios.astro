@@ -138,7 +138,7 @@ const canada = venuesWithMatches.filter(v => v.countryEn === 'Canada');
                 data-capacity={venue.capacity}
                 data-country={venue.countryEs}
                 data-matches={JSON.stringify(venue.matches.map(m => ({
-                  r: translateRound(m.round).replace('Matchday', 'Fecha').replace('Round of 16', 'Octavos').replace('Quarter-final', 'Cuartos').replace('Semi-final', 'Semifinal'),
+                  r: translateRound(m.round).replace('Fase de Grupos', 'Grupos').replace('Dieciséisavos de Final', '16vos').replace('Octavos de Final', '8vos').replace('Cuartos de Final', 'Cuartos').replace('Tercer Puesto', '3er Lugar'),
                   t1: translateTeam(m.team1),
                   t2: translateTeam(m.team2),
                   f1: getFlagUrl(m.team1),
@@ -210,7 +210,7 @@ const canada = venuesWithMatches.filter(v => v.countryEn === 'Canada');
             data-capacity={venue.capacity}
             data-country={venue.countryEs}
             data-matches={JSON.stringify(venue.matches.map(m => ({
-              r: translateRound(m.round).replace('Matchday', 'Fecha').replace('Round of 16', 'Octavos').replace('Quarter-final', 'Cuartos').replace('Semi-final', 'Semifinal'),
+              r: translateRound(m.round).replace('Fase de Grupos', 'Grupos').replace('Dieciséisavos de Final', '16vos').replace('Octavos de Final', '8vos').replace('Cuartos de Final', 'Cuartos').replace('Tercer Puesto', '3er Lugar'),
               t1: translateTeam(m.team1),
               t2: translateTeam(m.team2),
               f1: getFlagUrl(m.team1),

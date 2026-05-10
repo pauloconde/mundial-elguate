@@ -18,11 +18,11 @@ const dayGroups = getMatchesByDateChronological(data);
 function getPhase(match: any): string {
   if (match.group)                     return 'group';
   const r = match.round;
-  if (r === 'Round of 32')            return 'r32';
-  if (r === 'Round of 16')            return 'r16';
-  if (r === 'Quarter-final')          return 'qf';
-  if (r === 'Semi-final')             return 'sf';
-  if (r === 'Match for third place')  return '3rd';
+  if (r === 'Dieciséisavos de Final') return 'r32';
+  if (r === 'Octavos de Final')       return 'r16';
+  if (r === 'Cuartos de Final')       return 'qf';
+  if (r === 'Semifinales')            return 'sf';
+  if (r === 'Tercer Puesto')          return '3rd';
   if (r === 'Final')                  return 'final';
   return 'other';
 }
@@ -71,10 +71,33 @@ const anchorsShown  = new Set<string>();
       const firstPhase = getPhase(matches[0]);
       const firstInfo  = PHASE_INFO[firstPhase];
 
+      const showPhaseHeader = firstPhase !== globalLastPhase;
+      const anchorId = `fase-${firstPhase}`;
+      const needsAnchor = showPhaseHeader && !anchorsShown.has(firstPhase);
+      if (showPhaseHeader) {
+        globalLastPhase = firstPhase;
+        anchorsShown.add(firstPhase);
+      }
+
       return (
         <div>
+          {showPhaseHeader && firstInfo && (
+            <div
+              id={needsAnchor ? anchorId : undefined}
+              class="flex items-center gap-3 mt-8 mb-4"
+            >
+              <span class="text-2xl">{firstInfo.emoji}</span>
+              <h2 class="font-['Outfit'] font-black text-xl"
+                  style={`color: ${firstInfo.color};`}>
+                {firstInfo.label}
+              </h2>
+              <div class="flex-1 h-px"
+                   style={`background: ${firstInfo.color}40;`}></div>
+            </div>
+          )}
+
           {/* Encabezado del día — coloreado por la fase del primer partido */}
-          <div class="flex items-center gap-3 mb-2.5 mt-5">
+          <div class="date-header-container flex items-center gap-3 mb-2.5 mt-5">
             <div
               class="shrink-0 text-sm font-bold px-3 py-1 rounded-full"
               style={`background: ${firstInfo?.color ?? '#ffffff'}18;
@@ -94,7 +117,7 @@ const anchorsShown  = new Set<string>();
             </span>
           </div>
 
-          {/* Partidos — separadores de fase se inyectan por partido */}
+          {/* Partidos */}
           <div class="space-y-2 mb-1">
             {matches.map(match => {
               const phase     = getPhase(match);
@@ -104,32 +127,8 @@ const anchorsShown  = new Set<string>();
               const ft        = match.score?.ft;
               const utc       = getMatchUTC(match);
 
-              // Separador de fase: primera vez que aparece esta fase
-              const showPhaseHeader = phase !== globalLastPhase;
-              const anchorId = `fase-${phase}`;
-              const needsAnchor = showPhaseHeader && !anchorsShown.has(phase);
-              if (showPhaseHeader) {
-                globalLastPhase = phase;
-                anchorsShown.add(phase);
-              }
-
               return (
                 <div>
-                  {showPhaseHeader && phaseInfo && (
-                    <div
-                      id={needsAnchor ? anchorId : undefined}
-                      class="flex items-center gap-3 mt-6 mb-3"
-                    >
-                      <span class="text-2xl">{phaseInfo.emoji}</span>
-                      <h2 class="font-['Outfit'] font-black text-xl"
-                          style={`color: ${phaseInfo.color};`}>
-                        {phaseInfo.label}
-                      </h2>
-                      <div class="flex-1 h-px"
-                           style={`background: ${phaseInfo.color}40;`}></div>
-                    </div>
-                  )}
-
                   <div class="match-card px-4 py-3">
                     <div class="flex items-center gap-3">
 

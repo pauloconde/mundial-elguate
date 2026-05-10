@@ -346,11 +346,24 @@ const kickoffISOs = data.matches.map(m => getMatchUTC(m));
         }
 
         function applyLocalTimes() {
+          var lastDateText = null;
           document.querySelectorAll('[data-utc]').forEach(function (el) {
             var iso = el.getAttribute('data-utc');
             var fmt = el.getAttribute('data-fmt') || 'time';
             var text = formatLocal(iso, fmt);
-            if (text) el.textContent = text;
+            if (text) {
+              el.textContent = text;
+              if (fmt === 'date-full') {
+                if (text === lastDateText) {
+                  var headerDiv = el.closest('.date-header-container');
+                  if (headerDiv) headerDiv.style.display = 'none';
+                } else {
+                  var headerDiv = el.closest('.date-header-container');
+                  if (headerDiv) headerDiv.style.display = 'flex';
+                  lastDateText = text;
+                }
+              }
+            }
           });
         }
 

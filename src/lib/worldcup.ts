@@ -3,7 +3,7 @@
 // All display text is translated to Spanish via mapping tables.
 
 export const DATA_URL =
-  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+  'https://cqexjtuffyqgfxthvjhp.supabase.co/storage/v1/object/public/mundial/worldcup2026.json';
 
 // ──────────────────────────────────────────────
 // Types
@@ -63,54 +63,54 @@ export interface GroupStanding {
 // ──────────────────────────────────────────────
 
 export const TEAM_ES: Record<string, string> = {
-  'Mexico':               'México',
-  'South Africa':         'Sudáfrica',
-  'South Korea':          'Corea del Sur',
-  'Czech Republic':       'República Checa',
-  'Canada':               'Canadá',
-  'Bosnia & Herzegovina': 'Bosnia y Herzegovina',
-  'Qatar':                'Catar',
-  'Switzerland':          'Suiza',
-  'Brazil':               'Brasil',
-  'Morocco':              'Marruecos',
-  'Haiti':                'Haití',
-  'Scotland':             'Escocia',
-  'USA':                  'EE. UU.',
-  'Paraguay':             'Paraguay',
-  'Australia':            'Australia',
-  'Turkey':               'Turquía',
-  'Germany':              'Alemania',
-  'Curaçao':              'Curazao',
-  'Ivory Coast':          'Costa de Marfil',
-  'Ecuador':              'Ecuador',
-  'Netherlands':          'Países Bajos',
-  'Japan':                'Japón',
-  'Sweden':               'Suecia',
-  'Tunisia':              'Túnez',
-  'Belgium':              'Bélgica',
-  'Egypt':                'Egipto',
-  'Iran':                 'Irán',
-  'New Zealand':          'Nueva Zelanda',
-  'Spain':                'España',
-  'Cape Verde':           'Cabo Verde',
-  'Saudi Arabia':         'Arabia Saudita',
-  'Uruguay':              'Uruguay',
-  'France':               'Francia',
-  'Senegal':              'Senegal',
-  'Iraq':                 'Irak',
-  'Norway':               'Noruega',
-  'Argentina':            'Argentina',
-  'Algeria':              'Argelia',
-  'Austria':              'Austria',
-  'Jordan':               'Jordania',
-  'Portugal':             'Portugal',
-  'DR Congo':             'Rep. Dem. del Congo',
-  'Uzbekistan':           'Uzbekistán',
-  'Colombia':             'Colombia',
-  'England':              'Inglaterra',
-  'Croatia':              'Croacia',
-  'Ghana':                'Ghana',
-  'Panama':               'Panamá',
+  'ALG': 'Argelia',
+  'ARG': 'Argentina',
+  'AUS': 'Australia',
+  'AUT': 'Austria',
+  'BEL': 'Bélgica',
+  'BIH': 'Bosnia y Herzegovina',
+  'BRA': 'Brasil',
+  'CAN': 'Canadá',
+  'CIV': 'Costa de Marfil',
+  'COD': 'Rep. Dem. del Congo',
+  'COL': 'Colombia',
+  'CPV': 'Cabo Verde',
+  'CRO': 'Croacia',
+  'CUR': 'Curazao',
+  'CZE': 'República Checa',
+  'ECU': 'Ecuador',
+  'EGY': 'Egipto',
+  'ENG': 'Inglaterra',
+  'ESP': 'España',
+  'FRA': 'Francia',
+  'GER': 'Alemania',
+  'GHA': 'Ghana',
+  'HAI': 'Haití',
+  'IRN': 'Irán',
+  'IRQ': 'Irak',
+  'JOR': 'Jordania',
+  'JPN': 'Japón',
+  'KOR': 'Corea del Sur',
+  'KSA': 'Arabia Saudita',
+  'MAR': 'Marruecos',
+  'MEX': 'México',
+  'NED': 'Países Bajos',
+  'NOR': 'Noruega',
+  'NZL': 'Nueva Zelanda',
+  'PAN': 'Panamá',
+  'PAR': 'Paraguay',
+  'POR': 'Portugal',
+  'QAT': 'Catar',
+  'RSA': 'Sudáfrica',
+  'SCO': 'Escocia',
+  'SEN': 'Senegal',
+  'SUI': 'Suiza',
+  'SWE': 'Suecia',
+  'TUN': 'Túnez',
+  'TUR': 'Turquía',
+  'URU': 'Uruguay',
+  'USA': 'EE. UU.',
+  'UZB': 'Uzbekistán',
 };
 
 /** Devuelve el nombre del equipo en español, o traduce marcadores de posición (W/L) */
@@ -126,12 +126,15 @@ export function translateTeam(name: string): string {
     return name.replace(/^Loser\s+(?:Match\s+)?(\d+)$/i, 'Perdedor $1');
   }
 
-  // Formato corto (ej: "W73" -> "G73", "L73" -> "P73")
+  // Formato corto (ej: "W73" -> "G73", "L73" o "RU101" -> "P101")
   if (/^W(\d+)$/i.test(name)) {
     return name.replace(/^W(\d+)$/i, 'G$1');
   }
   if (/^L(\d+)$/i.test(name)) {
     return name.replace(/^L(\d+)$/i, 'P$1');
+  }
+  if (/^RU(\d+)$/i.test(name)) {
+    return name.replace(/^RU(\d+)$/i, 'P$1');
   }
 
   // Otros casos (ej: "1A", "2B") se quedan igual
@@ -142,87 +145,33 @@ export function translateTeam(name: string): string {
 // TRADUCCIÓN: Ciudades / Sedes
 // ──────────────────────────────────────────────
 
-export const GROUND_ES: Record<string, string> = {
-  'Mexico City':                                'Ciudad de México',
-  'Guadalajara (Zapopan)':                      'Guadalajara',
-  'Monterrey (Guadalupe)':                      'Monterrey',
-  'Los Angeles (Inglewood)':                    'Los Ángeles',
-  'Dallas (Arlington)':                         'Dallas',
-  'New York/New Jersey (East Rutherford)':      'Nueva York / Nueva Jersey',
-  'Miami (Miami Gardens)':                      'Miami',
-  'San Francisco Bay Area (Santa Clara)':       'Área de la Bahía de San Francisco',
-  'Houston':                                    'Houston',
-  'Philadelphia':                               'Filadelfia',
-  'Boston (Foxborough)':                        'Boston',
-  'Atlanta':                                    'Atlanta',
-  'Seattle':                                    'Seattle',
-  'Kansas City':                                'Kansas City',
-  'Vancouver':                                  'Vancouver',
-  'Toronto':                                    'Toronto',
-};
+export const GROUND_ES: Record<string, string> = {};
 
 /** Devuelve el nombre de la sede en español. */
 export function translateGround(ground: string): string {
-  return GROUND_ES[ground] ?? ground;
+  return ground;
 }
 
 // ──────────────────────────────────────────────
 // TRADUCCIÓN: Rondas / Fases
 // ──────────────────────────────────────────────
 
-export const ROUND_ES: Record<string, string> = {
-  'Matchday 1':            'Fecha 1',
-  'Matchday 2':            'Fecha 2',
-  'Matchday 3':            'Fecha 3',
-  'Matchday 4':            'Fecha 4',
-  'Matchday 5':            'Fecha 5',
-  'Matchday 6':            'Fecha 6',
-  'Matchday 7':            'Fecha 7',
-  'Matchday 8':            'Fecha 8',
-  'Matchday 9':            'Fecha 9',
-  'Matchday 10':           'Fecha 10',
-  'Matchday 11':           'Fecha 11',
-  'Matchday 12':           'Fecha 12',
-  'Matchday 13':           'Fecha 13',
-  'Matchday 14':           'Fecha 14',
-  'Matchday 15':           'Fecha 15',
-  'Matchday 16':           'Fecha 16',
-  'Matchday 17':           'Fecha 17',
-  'Round of 32':           'Dieciséisavos',
-  'Round of 16':           'Octavos de Final',
-  'Quarter-final':         'Cuartos de Final',
-  'Semi-final':            'Semifinal',
-  'Match for third place': 'Tercer Lugar',
-  'Final':                 'Gran Final',
-};
+export const ROUND_ES: Record<string, string> = {};
 
 /** Devuelve el nombre de la ronda en español. */
 export function translateRound(round: string): string {
-  return ROUND_ES[round] ?? round;
+  return round;
 }
 
 // ──────────────────────────────────────────────
 // TRADUCCIÓN: Grupos
 // ──────────────────────────────────────────────
 
-export const GROUP_ES: Record<string, string> = {
-  'Group A': 'Grupo A',
-  'Group B': 'Grupo B',
-  'Group C': 'Grupo C',
-  'Group D': 'Grupo D',
-  'Group E': 'Grupo E',
-  'Group F': 'Grupo F',
-  'Group G': 'Grupo G',
-  'Group H': 'Grupo H',
-  'Group I': 'Grupo I',
-  'Group J': 'Grupo J',
-  'Group K': 'Grupo K',
-  'Group L': 'Grupo L',
-};
+export const GROUP_ES: Record<string, string> = {};
 
 /** Devuelve el nombre del grupo en español. */
 export function translateGroup(group: string): string {
-  return GROUP_ES[group] ?? group;
+  return group;
 }
 
 // ──────────────────────────────────────────────
@@ -230,19 +179,14 @@ export function translateGroup(group: string): string {
 // ──────────────────────────────────────────────
 
 const FLAG_CODES: Record<string, string> = {
-  'Mexico': 'mx', 'South Africa': 'za', 'South Korea': 'kr',
-  'Czech Republic': 'cz', 'Canada': 'ca', 'Bosnia & Herzegovina': 'ba',
-  'Qatar': 'qa', 'Switzerland': 'ch', 'Brazil': 'br', 'Morocco': 'ma',
-  'Haiti': 'ht', 'Scotland': 'gb-sct', 'USA': 'us', 'Paraguay': 'py',
-  'Australia': 'au', 'Turkey': 'tr', 'Germany': 'de', 'Curaçao': 'cw',
-  'Ivory Coast': 'ci', 'Ecuador': 'ec', 'Netherlands': 'nl', 'Japan': 'jp',
-  'Sweden': 'se', 'Tunisia': 'tn', 'Belgium': 'be', 'Egypt': 'eg',
-  'Iran': 'ir', 'New Zealand': 'nz', 'Spain': 'es', 'Cape Verde': 'cv',
-  'Saudi Arabia': 'sa', 'Uruguay': 'uy', 'France': 'fr', 'Senegal': 'sn',
-  'Iraq': 'iq', 'Norway': 'no', 'Argentina': 'ar', 'Algeria': 'dz',
-  'Austria': 'at', 'Jordan': 'jo', 'Portugal': 'pt', 'DR Congo': 'cd',
-  'Uzbekistan': 'uz', 'Colombia': 'co', 'England': 'gb-eng', 'Croatia': 'hr',
-  'Ghana': 'gh', 'Panama': 'pa',
+  'ALG': 'dz', 'ARG': 'ar', 'AUS': 'au', 'AUT': 'at', 'BEL': 'be', 'BIH': 'ba',
+  'BRA': 'br', 'CAN': 'ca', 'CIV': 'ci', 'COD': 'cd', 'COL': 'co', 'CPV': 'cv',
+  'CRO': 'hr', 'CUR': 'cw', 'CZE': 'cz', 'ECU': 'ec', 'EGY': 'eg', 'ENG': 'gb-eng',
+  'ESP': 'es', 'FRA': 'fr', 'GER': 'de', 'GHA': 'gh', 'HAI': 'ht', 'IRN': 'ir',
+  'IRQ': 'iq', 'JOR': 'jo', 'JPN': 'jp', 'KOR': 'kr', 'KSA': 'sa', 'MAR': 'ma',
+  'MEX': 'mx', 'NED': 'nl', 'NOR': 'no', 'NZL': 'nz', 'PAN': 'pa', 'PAR': 'py',
+  'POR': 'pt', 'QAT': 'qa', 'RSA': 'za', 'SCO': 'gb-sct', 'SEN': 'sn', 'SUI': 'ch',
+  'SWE': 'se', 'TUN': 'tn', 'TUR': 'tr', 'URU': 'uy', 'USA': 'us', 'UZB': 'uz',
 };
 
 export function getFlagUrl(team: string): string {
@@ -255,22 +199,19 @@ export function getFlagUrl(team: string): string {
 // ──────────────────────────────────────────────
 
 /**
- * Parsea "13:00 UTC-6" a un objeto Date en UTC, dado "2026-06-11"
+ * Parsea "15:00" a un objeto Date en UTC, dado "2026-06-11"
  */
 export function parseMatchDate(dateStr: string, timeStr: string): Date {
-  const match = timeStr.match(/^(\d{1,2}):(\d{2})\s+UTC([+-]\d+)$/);
-  if (!match) return new Date(`${dateStr}T12:00:00Z`);
+  const [hStr, mStr] = timeStr.split(':');
+  if (!hStr || !mStr) return new Date(`${dateStr}T12:00:00Z`);
 
-  const [, h, m, offsetStr] = match;
-  const offset    = parseInt(offsetStr, 10);
-  const localHour = parseInt(h, 10);
-  const localMin  = parseInt(m, 10);
+  const utcHour = parseInt(hStr, 10);
+  const localMin  = parseInt(mStr, 10);
 
-  const utcHour = localHour - offset;
   return new Date(Date.UTC(
-    parseInt(dateStr.slice(0, 4)),
-    parseInt(dateStr.slice(5, 7)) - 1,
-    parseInt(dateStr.slice(8, 10)),
+    parseInt(dateStr.slice(0, 4), 10),
+    parseInt(dateStr.slice(5, 7), 10) - 1,
+    parseInt(dateStr.slice(8, 10), 10),
     utcHour,
     localMin
   ));
@@ -459,22 +400,22 @@ export interface Venue {
 }
 
 export const VENUES: Venue[] = [
-  { name: 'Estadio Azteca',          cityEn: 'Mexico City',                               cityEs: 'Ciudad de México',                      countryEn: 'Mexico',  countryEs: 'México',        capacity: '87,523', imageKey: 'mexico-city' },
-  { name: 'Estadio Akron',           cityEn: 'Guadalajara (Zapopan)',                      cityEs: 'Guadalajara',                           countryEn: 'Mexico',  countryEs: 'México',        capacity: '49,850', imageKey: 'guadalajara' },
-  { name: 'Estadio BBVA',            cityEn: 'Monterrey (Guadalupe)',                      cityEs: 'Monterrey',                             countryEn: 'Mexico',  countryEs: 'México',        capacity: '53,500', imageKey: 'monterrey' },
-  { name: 'SoFi Stadium',            cityEn: 'Los Angeles (Inglewood)',                    cityEs: 'Los Ángeles',                           countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '70,240', imageKey: 'los-angeles' },
-  { name: 'AT&T Stadium',            cityEn: 'Dallas (Arlington)',                         cityEs: 'Dallas',                                countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '80,000', imageKey: 'dallas' },
-  { name: 'MetLife Stadium',         cityEn: 'New York/New Jersey (East Rutherford)',      cityEs: 'Nueva York / Nueva Jersey',             countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '82,500', imageKey: 'new-york' },
-  { name: 'Hard Rock Stadium',       cityEn: 'Miami (Miami Gardens)',                      cityEs: 'Miami',                                 countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '64,767', imageKey: 'miami' },
-  { name: "Levi's Stadium",          cityEn: 'San Francisco Bay Area (Santa Clara)',       cityEs: 'Área de la Bahía de San Francisco',     countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '68,500', imageKey: 'san-francisco' },
-  { name: 'NRG Stadium',             cityEn: 'Houston',                                    cityEs: 'Houston',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '72,220', imageKey: 'houston' },
-  { name: 'Lincoln Financial Field', cityEn: 'Philadelphia',                               cityEs: 'Filadelfia',                            countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '69,796', imageKey: 'philadelphia' },
-  { name: 'Gillette Stadium',        cityEn: 'Boston (Foxborough)',                        cityEs: 'Boston',                                countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '65,878', imageKey: 'boston' },
-  { name: 'Mercedes-Benz Stadium',   cityEn: 'Atlanta',                                    cityEs: 'Atlanta',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '71,000', imageKey: 'atlanta' },
-  { name: 'Lumen Field',             cityEn: 'Seattle',                                    cityEs: 'Seattle',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '68,740', imageKey: 'seattle' },
-  { name: 'Arrowhead Stadium',       cityEn: 'Kansas City',                                cityEs: 'Kansas City',                           countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '76,416', imageKey: 'kansas-city' },
-  { name: 'BC Place',                cityEn: 'Vancouver',                                  cityEs: 'Vancouver',                             countryEn: 'Canada',  countryEs: 'Canadá',        capacity: '54,500', imageKey: 'vancouver' },
-  { name: 'BMO Field',               cityEn: 'Toronto',                                    cityEs: 'Toronto',                               countryEn: 'Canada',  countryEs: 'Canadá',        capacity: '45,736', imageKey: 'toronto' },
+  { name: 'Estadio Azteca',          cityEn: 'Ciudad de México',                          cityEs: 'Ciudad de México',                      countryEn: 'Mexico',  countryEs: 'México',        capacity: '87,523', imageKey: 'mexico-city' },
+  { name: 'Estadio Akron',           cityEn: 'Guadalajara',                               cityEs: 'Guadalajara',                           countryEn: 'Mexico',  countryEs: 'México',        capacity: '49,850', imageKey: 'guadalajara' },
+  { name: 'Estadio BBVA',            cityEn: 'Monterrey',                                 cityEs: 'Monterrey',                             countryEn: 'Mexico',  countryEs: 'México',        capacity: '53,500', imageKey: 'monterrey' },
+  { name: 'SoFi Stadium',            cityEn: 'Los Angeles',                               cityEs: 'Los Ángeles',                           countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '70,240', imageKey: 'los-angeles' },
+  { name: 'AT&T Stadium',            cityEn: 'Dallas',                                    cityEs: 'Dallas',                                countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '80,000', imageKey: 'dallas' },
+  { name: 'MetLife Stadium',         cityEn: 'Nueva York/Nueva Jersey',                   cityEs: 'Nueva York/Nueva Jersey',               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '82,500', imageKey: 'new-york' },
+  { name: 'Hard Rock Stadium',       cityEn: 'Miami',                                     cityEs: 'Miami',                                 countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '64,767', imageKey: 'miami' },
+  { name: "Levi's Stadium",          cityEn: 'Área de la Bahía de San Francisco',         cityEs: 'Área de la Bahía de San Francisco',     countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '68,500', imageKey: 'san-francisco' },
+  { name: 'NRG Stadium',             cityEn: 'Houston',                                   cityEs: 'Houston',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '72,220', imageKey: 'houston' },
+  { name: 'Lincoln Financial Field', cityEn: 'Philadelphia',                              cityEs: 'Filadelfia',                            countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '69,796', imageKey: 'philadelphia' },
+  { name: 'Gillette Stadium',        cityEn: 'Boston',                                    cityEs: 'Boston',                                countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '65,878', imageKey: 'boston' },
+  { name: 'Mercedes-Benz Stadium',   cityEn: 'Atlanta',                                   cityEs: 'Atlanta',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '71,000', imageKey: 'atlanta' },
+  { name: 'Lumen Field',             cityEn: 'Seattle',                                   cityEs: 'Seattle',                               countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '68,740', imageKey: 'seattle' },
+  { name: 'Arrowhead Stadium',       cityEn: 'Kansas City',                               cityEs: 'Kansas City',                           countryEn: 'USA',     countryEs: 'EE. UU.',       capacity: '76,416', imageKey: 'kansas-city' },
+  { name: 'BC Place',                cityEn: 'Vancouver',                                 cityEs: 'Vancouver',                             countryEn: 'Canada',  countryEs: 'Canadá',        capacity: '54,500', imageKey: 'vancouver' },
+  { name: 'BMO Field',               cityEn: 'Toronto',                                   cityEs: 'Toronto',                               countryEn: 'Canada',  countryEs: 'Canadá',        capacity: '45,736', imageKey: 'toronto' },
 ];
 
 export function getUniqueVenues(data: WorldCupData): string[] {

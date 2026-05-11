@@ -48,7 +48,7 @@ const hayResultados  = standings.some(s => s.teams.some(t => t.played > 0));
     <!-- Grupos A–L -->
     {standings.map(groupData => {
       const groupMatches = matchesByGroup.get(groupData.group) ?? [];
-      const letter       = groupData.group.replace('Group ', '');
+      const letter       = groupData.group.replace(/Group\s+|Grupo\s+/i, '');
       return (
         <div class="mb-10" id={`grupo-${letter.toLowerCase()}`}>
 

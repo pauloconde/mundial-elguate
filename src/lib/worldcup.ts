@@ -195,7 +195,7 @@ export function getFlagUrl(team: string): string {
     return 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='; // píxel transparente
   }
   const code = FLAG_CODES[team] ?? team.toLowerCase().substring(0, 2);
-  return `https://flagcdn.com/28x21/${code}.png`;
+  return `https://flagcdn.com/${code}.svg`;
 }
 
 // ──────────────────────────────────────────────

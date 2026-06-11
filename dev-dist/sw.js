@@ -78,7 +78,7 @@ define(['./workbox-7e5eb42b'], (function (workbox) { 'use strict';
    */
   workbox.precacheAndRoute([{
     "url": "/",
-    "revision": "0.ngqp5h74c2g"
+    "revision": "0.ojko7q72ktg"
   }], {
     "directoryIndex": "index.html"
   });

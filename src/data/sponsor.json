@@ -15,9 +15,9 @@
   "email": "",
   "phone": "+584245775557",
   "address": "Av. Nueva Barinas, Barinas.",
-  "googleMaps": "https://maps.app.goo.gl/Nqa2tKpGVSEJoNY29",
+  "googleMaps": "https://maps.app.goo.gl/WHs3qNUj33Ppb3CV6",
   "address2": "Av. Chupa Chupa, Barinas.",
-  "googleMaps2": "https://maps.app.goo.gl/Nqa2tKpGVSEJoNY29",
+  "googleMaps2": "https://maps.app.goo.gl/HJWibzcTrz98MGtb6",
   "hasQuiniela": true,
   "quinielaTitle": "⚽ Gran Quiniela El Guate 🏆",
   "quinielaDescription": "Acierta el 1er y 2do lugar del Mundial y gana increíbles premios con nosotros.",
@@ -52,9 +52,9 @@
   },
   "showBanner": true,
   "bannerDuration": 3,
-  "banner1url": "/bannerguate1.webp",
+  "banner1url": "/bannerguate4.webp",
   "banner2url": "/bannerguate2.webp",
   "banner3url": "/bannerguate3.webp",
-  "banner4url": "",
+  "banner4url": "/bannerguate1.webp",
   "banner5url": ""
 }

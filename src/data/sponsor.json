@@ -22,6 +22,12 @@
   "quinielaId": "elguate",
   "quinielaEndDate": "2026-06-27T23:59:00Z",
   "quinielaPrizeImage": "/premio.webp",
+  "quinielaRequireReceipt": false,
+  "includeThirdPlacePrediction": false,
+  "quinielaPredictFinalScore": false,
+  "FixedMatchEnabled": false,
+  "FixedMatchTeamA": "",
+  "FixedMatchTeamB": "",
   "theme": "dark",
   "colors": {
     "appBg": "#263b8f",
